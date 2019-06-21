@@ -22,7 +22,9 @@ const ele = new Vue({
   data : {
     button_list : [0,1,2,3,4,5,6,7,8,9],
     display_num : "",
+    game_clear_flag : false,
     answer_num,
+    judge_cnt : 0,
     judge_result_list : []
   },
   methods : {
@@ -56,6 +58,9 @@ const ele = new Vue({
         eat : 0,
         bite : 0
       };
+      if(display_num_ary.length != 3){
+        return "数字の数が3つでないので、判定不能";
+      }
       for(let answer in answer_num_ary){
         for(let display in display_num_ary){
           if(answer_num_ary[answer] === display_num_ary[display]){
@@ -69,7 +74,17 @@ const ele = new Vue({
       }
       this.judge_result_list.push(result_object);
       this.display_num = "";
+      this.judge_cnt++;
+      if(result_object.eat === answer_num_ary.length){
+        this.game_clear();
+      }
       console.log(result_object);
+    },
+    game_clear : function(){
+      this.game_clear_flag = true;
+      this.display_num_push = function(){};
+      this.judge = function(){};
+      this.all_clear = function(){};
     }
   }
 })

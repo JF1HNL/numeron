@@ -10,7 +10,11 @@
 <body>
   <div id="ele">
     <div>ぬめろん</div>
-    <div>{{ display_num }}</div>
+    <div v-if="game_clear_flag">
+      <h1>おめでとう！{{ judge_cnt }}回でゲームクリアだよ！</h1>
+      <input type="button" value="ここから結果をツイッターにつぶやこう！（まだできてないけど）">
+    </div>
+    <div>ここに表示：{{ display_num }}</div>
     <input v-for="item in button_list" type="button" v-bind:value="item" @click="display_num_push(item)"><br>
     <input type="button" value="all clear" @click="all_clear()">
     <input type="button" value="judge" @click="judge()">
