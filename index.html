@@ -5,8 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
-  
+  <div id="ele">
+    <div>ぬめろん</div>
+    <div>{{ display_num }}</div>
+    <input v-for="item in button_list" type="button" v-bind:value="item" @click="display_num_push(item)"><br>
+    <input type="button" value="all clear" @click="all_clear()">
+    <input type="button" value="judge" @click="judge()">
+    <ol>
+      <li v-for="it in judge_result_list">
+        数字：{{ it.num }}<br>
+        {{ it.eat }}EAT {{ it.bite }}BITE
+      </li>
+    </ol>
+  </div>
+  <script src="index.js"></script>
 </body>
 </html>
