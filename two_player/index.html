@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>numeron</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="element">
+    <h1>ヌメロン:2人プレイ</h1>
+    <div v-if="!game_end">{{ first_strike_flag ? '先攻' : '後攻' }}プレイヤーのターン</div>
+    <div class="comment_display">{{ game_end ? game_end_display_message : display_message_maker }}</div>
+    <div v-if="!game_end">
+      <div>入力された文字：{{ display_num }}</div>
+      <div v-if="input_area_flag">
+        <input v-for="item in button_list" type="button" v-bind:value="item" @click="display_num_push(item)"><br>
+        <input type="button" value="all clear" @click="all_clear()">
+        <input v-if="!answer_num.first_strike || !answer_num.second_strike" type="button" value="初期値を決める" @click="setting_num()">
+        <input v-else type="button" value="判定" @click="judge()">
+      </div>
+      <input v-else type="button" value="相手にターンを渡す。" @click="turn_chenge()">
+    </div>
+    <br>
+    <div v-if="first_strike_flag || game_end">
+      <div>先攻プレイヤーの履歴</div>
+      <ol>
+        <li v-for="it in judge_result_list.second_strike">
+          数字：{{ it.num }}<br>
+          {{ it.eat }}EAT {{ it.bite }}BITE
+        </li>
+      </ol>
+    </div>
+    <div v-if="!first_strike_flag || game_end">
+      <div>後攻プレイヤーの履歴</div>
+      <ol>
+        <li v-for="it in judge_result_list.first_strike">
+          数字：{{ it.num }}<br>
+          {{ it.eat }}EAT {{ it.bite }}BITE
+        </li>
+      </ol>
+    </div>
+  </div>
+  <script src="./index.js"></script>
+</body>
+</html>
