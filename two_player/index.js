@@ -44,7 +44,7 @@ const app = new Vue({
       }
     },
     judge : function(){
-      const answer_num_ary = this.first_strike_flag ? this.answer_num.second_strike.split("") : this.answer_num.second_strike.split("");
+      const answer_num_ary = this.first_strike_flag ? this.answer_num.second_strike.split("") : this.answer_num.first_strike.split("");
       const display_num_ary = this.display_num.split("");
       const result_object = {
         num : this.display_num,
